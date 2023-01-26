@@ -11,6 +11,12 @@ option = st.selectbox("Select data to view", ("Temperature", "Sky"))
 st.subheader(f"{option} for the next {days} days in {place}")
 
 
-data = get_data(place, days, option)
+filtered_data = get_data(place, days)
+
+if option == "Temperature":
+    temperatures = [item['main']['temp'] for item in filtered_data]
+elif option == "Sky":
+    weather_conditions = [item['weather'][0]['main'] for item in filtered_data]
+
 # figure = ps.line(x=dates, y=temperatures, labels={'x': 'Date', 'y': 'Temperature (C)'})
 # st.plotly_chart(figure)
